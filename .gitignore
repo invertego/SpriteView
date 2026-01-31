@@ -1,0 +1,8 @@
+*.bmp
+*.gif
+*.zst
+*.zmv
+*.user
+Debug/
+Release/
+.vs/
