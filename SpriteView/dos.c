@@ -47,9 +47,9 @@ void DosIntHandler(Registers* r)
     }
     case 0x3f: { // read file
         FILE* file = (FILE*)r->ebx;
-        u16 len = r->cx;
+        u32 len = r->ecx;
         void* buf = (void*)r->edx;
-        r->ax = (u16)fread(buf, 1, len, file);
+        r->eax = fread(buf, 1, len, file);
         r->eflags &= ~CF;
         break;
     }
