@@ -112,12 +112,19 @@ void WinUpdate()
 
 int main(int argc, char* argv[])
 {
+    char title[512];
+    size_t length = SDL_utf8strlcpy(title, "SpriteView -", sizeof(title));
+    for (int i = 1; i < argc; i++) {
+        length += SDL_utf8strlcpy(title + length,     " ", sizeof(title) - length);
+        length += SDL_utf8strlcpy(title + length, argv[i], sizeof(title) - length);
+    }
+
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         fprintf(stderr, "SDL_Init failed: %s\n", SDL_GetError());
         return 1;
     }
 
-    if (!SDL_CreateWindowAndRenderer("SpriteView", 320 * SCALE_FACTOR, 200 * SCALE_FACTOR, 0, &window, &renderer)) {
+    if (!SDL_CreateWindowAndRenderer(title, 320 * SCALE_FACTOR, 200 * SCALE_FACTOR, 0, &window, &renderer)) {
         fprintf(stderr, "SDL_CreateWindowAndRenderer failed: %s\n", SDL_GetError());
         return 1;
     }
